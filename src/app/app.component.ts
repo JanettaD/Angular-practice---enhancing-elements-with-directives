@@ -5,17 +5,22 @@ import { LearningResourcesComponent } from './learning-resources/learning-resour
 import { AuthService } from './auth/auth.service';
 //import { NgIf } from '@angular/common';
 import { AuthDirective } from './auth/auth.directive';
+import { LogDirective } from './log.directive';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [AuthComponent, LearningResourcesComponent, AuthDirective],
+  imports: [
+    AuthComponent,
+    LearningResourcesComponent,
+    AuthDirective,
+    LogDirective,
+  ],
 })
 export class AppComponent {
+  private authService = inject(AuthService);
 
-    private authService = inject(AuthService);
-
-    isAdmin = computed(() => this.authService.activePermission() === 'admin')
+  isAdmin = computed(() => this.authService.activePermission() === 'admin');
 }
